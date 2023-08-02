@@ -3,10 +3,14 @@ import { windowMoveHandler } from "./move";
 import { windowResizeHandler } from "./resize";
 
 const createWindowDefaultOptions = {
-    title: "lorem is idos ido sidos idos i",
+    title: "untitled window",
     icon: "",
-    body: "body",
-    resize: true
+    body: "",
+    resize: true,
+    move: true,
+    close: true,
+    minimize: true,
+    center: false
 };
 
 export function createWindow(options) {
@@ -19,15 +23,15 @@ export function createWindow(options) {
     windowDiv.innerHTML = /*html*/`
         <div class="head">
             <div class="title">
-                ${options.icon ? `<img src="${options.icon}" alt="icon">` : ""}
+                ${options.icon ? `<img src="${options.icon}" alt="icon" draggable="false">` : ""}
                 <span>${options.title}</span>
             </div>
             <div class="controls">
-                <button class="minimize">_</button>
-                <button class="close">x</button>
+                ${options.minimize ? `<button class="minimize">_</button>` : ""}
+                ${options.close ? `<button class="close">x</button>` : ""}
             </div>
         </div>
-        <div class="body">${options.body}</div>
+        <div class="body ${options.flexCenter ? "body-center" : ""}">${options.body}</div>
 
         ${options.resize ? /*html*/`
         <div class="resize top-resize"></div>
@@ -42,9 +46,14 @@ export function createWindow(options) {
     `;
 
     windowDiv.querySelector(".head").onmousedown = windowMoveHandler
-
     windowDiv.querySelectorAll(".resize").forEach(r => r.onmousedown = windowResizeHandler);
 
     document.getElementById("window-container").append(windowDiv);
+
+    if (options.center) {
+        windowDiv.style.left = `${window.innerWidth / 2 - windowDiv.offsetWidth / 2}px`;
+        windowDiv.style.top = `${window.innerHeight / 2 - windowDiv.offsetHeight / 2}px`;
+    }
+
     window.windows.push(id);
 }
