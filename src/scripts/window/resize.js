@@ -1,4 +1,5 @@
 let selectedWindowResize = null;
+let [x, y] = [0, 0];
 
 export function windowResizeHandler(e) {
     window.activeWindow = e.target.parentElement;

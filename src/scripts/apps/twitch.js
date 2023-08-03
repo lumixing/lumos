@@ -24,7 +24,7 @@ export function launchTwitch() {
         createWindow({
             title: `https://twitch.tv/${channelName}`,
             body: /*html*/`
-                <iframe class="w100 h100" src="https://player.twitch.tv/?channel=${channelName}&parent=lumixing.github.io/lumos" frameborder="0" allowfullscreen="true" scrolling="no"></iframe>
+                <iframe class="w100 h100" src="https://player.twitch.tv/?channel=${channelName}&parent=lumixing.github.io" frameborder="0" allowfullscreen="true" scrolling="no"></iframe>
             `,
             x: 127,
             y: 39,
@@ -36,7 +36,7 @@ export function launchTwitch() {
         createWindow({
             title: `https://twitch.tv/${channelName}/chat`,
             body: /*html*/`
-                <iframe class="w100 h100" src="https://www.twitch.tv/embed/${channelName}/chat?parent=lumixing.github.io/lumos"></iframe>
+                <iframe class="w100 h100" src="https://www.twitch.tv/embed/${channelName}/chat?parent=lumixing.github.io"></iframe>
             `,
             x: 1127,
             y: 38,
