@@ -1,31 +1,19 @@
-import { launch } from "./apps/about";
+import { loadApps } from "./desktop/loadApps";
+import { shortcutHandler } from "./shortcuts";
 import { createToast } from "./toast/main";
-import { createWindow } from "./window/main";
 
 console.log("booting!");
+createToast("successfully booted!", 1000, "success");
 
 window.windows = [];
-window.zIndex = 0;
+window.zIndex = 10;
 window.activeWindow = null;
+window.activeApp = null;
 
-launch();
-createToast({
-    text: "yo bitch im booted up",
-    time: 1000
-});
+shortcutHandler();
 
-document.onkeydown = ((e) => {
-    if (e.key == "a" && e.altKey) {
-        createWindow();
-    }
+window.onerror = (_a, _b, _c, _d, err) => {
+    createToast(`Uh oh! Seems like an error occured:<br>${err}<br>Check the console for more information...`, 5000, "error");
+};
 
-    if (e.key == "q" && e.altKey) {
-        window.activeWindow.remove();
-    }
-
-    if (e.key == "s" && e.altKey) {
-        createToast({
-            text: Date.now()
-        });
-    }
-});
+loadApps();

@@ -49,7 +49,10 @@ function windowResizeMouseMoveHandler(e) {
 }
 
 function windowResizeMouseUpHandler() {
-    // window.activeWindow = null;
+    if (window.activeWindow.offsetWidth % 2 == 1) {
+        window.activeWindow.style.width = `${window.activeWindow.offsetWidth + 1}px`;
+    }
+
     selectedWindowResize = null;
     document.removeEventListener("mousemove", windowResizeMouseMoveHandler);
     document.removeEventListener("mouseup", windowResizeMouseUpHandler);

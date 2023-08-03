@@ -10,7 +10,13 @@ const createWindowDefaultOptions = {
     move: true,
     close: true,
     minimize: true,
-    center: false
+    center: false,
+    x: 0,
+    y: 0,
+    width: 300,
+    height: 300,
+    hideOverflow: false,
+    flexCenter: false
 };
 
 export function createWindow(options) {
@@ -45,15 +51,39 @@ export function createWindow(options) {
         ` : ""}
     `;
 
-    windowDiv.querySelector(".head").onmousedown = windowMoveHandler
+    windowDiv.onclick = () => {
+        window.activeWindow = windowDiv;
+        window.activeWindow.style.zIndex = ++window.zIndex;
+    };
+    windowDiv.querySelector(".head").onmousedown = windowMoveHandler;
     windowDiv.querySelectorAll(".resize").forEach(r => r.onmousedown = windowResizeHandler);
+    windowDiv.querySelector(".close").onclick = closeWindow;
 
     document.getElementById("window-container").append(windowDiv);
 
+    windowDiv.style.zIndex = ++window.zIndex;
+    windowDiv.style.left = `${options.x}px`;
+    windowDiv.style.top = `${options.y}px`;
+    windowDiv.style.width = `${options.width}px`;
+    windowDiv.style.height = `${options.height}px`;
+
+    if (options.hideOverflow) {
+        windowDiv.querySelector(".body").style.overflow = "hidden";
+    }
+
     if (options.center) {
-        windowDiv.style.left = `${window.innerWidth / 2 - windowDiv.offsetWidth / 2}px`;
-        windowDiv.style.top = `${window.innerHeight / 2 - windowDiv.offsetHeight / 2}px`;
+        windowDiv.style.left = `${~~(window.innerWidth / 2 - windowDiv.offsetWidth / 2)}px`;
+        windowDiv.style.top = `${~~(window.innerHeight / 2 - windowDiv.offsetHeight / 2)}px`;
     }
 
     window.windows.push(id);
+    window.activeWindow = windowDiv;
+
+    return windowDiv;
+}
+
+function closeWindow(e) {
+    let windowDiv = e.target.closest(".window");
+    windowDiv.remove();
+    window.activeWindow = null;
 }
