@@ -5,6 +5,7 @@ import { launchEditor } from "../apps/editor";
 import { launchTwitch } from "../apps/twitch";
 import { launchSpotify } from "../apps/spotify";
 import { launchWhatsNew } from "../apps/whatsnew";
+import { launchCSS } from "../apps/css";
 
 const defaultLoadedApps = {
     "about": [100, 100],
@@ -12,6 +13,7 @@ const defaultLoadedApps = {
     "twitch": [300, 100],
     "spotify": [400, 100],
     "whatsnew": [500, 100],
+    "css": [600, 100],
 };
 
 export function loadApps() {
@@ -31,4 +33,5 @@ export function loadApps() {
     createApp("twitch", launchTwitch, loadedApps["twitch"][0], loadedApps["twitch"][1]);
     createApp("spotify", launchSpotify, loadedApps["spotify"][0], loadedApps["spotify"][1]);
     createApp("whatsnew", launchWhatsNew, loadedApps["whatsnew"][0], loadedApps["whatsnew"][1]);
+    createApp("css", launchCSS, loadedApps["css"][0], loadedApps["css"][1]);
 }

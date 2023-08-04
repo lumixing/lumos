@@ -9,8 +9,8 @@ export function launchAbout() {
         minimize: false,
         flexCenter: true,
         body: /*html*/`
-            <div class="df fdc g8">    
-                <div class="df aic g8">
+            <div class="flex flex-column g8">    
+                <div class="flex align-center g8">
                     <img src=${image} alt="lumos" width="48">
                     <div class="div">
                         <h1>lumOS</h1>
@@ -18,7 +18,7 @@ export function launchAbout() {
                     </div>
                 </div>
                 <p>really cool operating system</p>
-                <button class="asc">ok</button>
+                <button class="align-self-center">ok</button>
             </div>
         `
     });

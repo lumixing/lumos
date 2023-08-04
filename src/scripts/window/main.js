@@ -25,6 +25,7 @@ export function createWindow(options) {
     let id = Math.random();
     let windowDiv = document.createElement("div");
     windowDiv.classList.add("window");
+    windowDiv.dataset.id = id;
 
     windowDiv.innerHTML = /*html*/`
         <div class="head">
@@ -51,13 +52,17 @@ export function createWindow(options) {
         ` : ""}
     `;
 
-    windowDiv.onclick = () => {
-        window.activeWindow = windowDiv;
-        window.activeWindow.style.zIndex = ++window.zIndex;
+    windowDiv.onclick = (e) => {
+        if (e.target.closest(".controls")) return;
+        focusWindow(e.target.closest(".window"));
     };
+
     windowDiv.querySelector(".head").onmousedown = windowMoveHandler;
     windowDiv.querySelectorAll(".resize").forEach(r => r.onmousedown = windowResizeHandler);
-    windowDiv.querySelector(".close").onclick = closeWindow;
+    
+    windowDiv.querySelector(".close").onclick = (e) => {
+        closeWindow(e.target.closest(".window"));
+    };
 
     document.getElementById("window-container").append(windowDiv);
 
@@ -82,8 +87,12 @@ export function createWindow(options) {
     return windowDiv;
 }
 
-function closeWindow(e) {
-    let windowDiv = e.target.closest(".window");
+function focusWindow(windowDiv) {
+    window.activeWindow = windowDiv;
+    window.activeWindow.style.zIndex = ++window.zIndex;
+}
+
+function closeWindow(windowDiv) {
     windowDiv.remove();
     window.activeWindow = null;
 }

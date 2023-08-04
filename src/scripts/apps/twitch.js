@@ -4,7 +4,7 @@ export function launchTwitch() {
     let windowDiv = createWindow({
         title: "https://twitch.tv",
         body: /*html*/`
-            <div class="df fdc jcc aic g4">
+            <div class="flex flex-column flex-center g4">
                 <label for="twitch-channel">type a twitch username to watch:</label>
                 <div>
                     <input type="text" id="twitch-channel">

@@ -7,13 +7,13 @@ export function launchWhatsNew() {
         title: "what's new?!",
         icon: image,
         body: /*html*/`
-            <div style="padding: 8px">
+            <div class="p8">
                 <h1>WHAT'S NEW?!</h1>
                 <span>in version 0.2</span>
 
-                <h1 style="margin-top: 16px">Added</h1>
+                <h1 class="mt16">Added</h1>
                 
-                <div style="margin-bottom: 16px">
+                <div class="mb16">
                     <p>Some cool new apps!</p>
                     <ul>
                         <li><b>About</b> See what's all about lumOS</li>
@@ -24,7 +24,7 @@ export function launchWhatsNew() {
                     </ul>
                 </div>
 
-                <div style="margin-bottom: 16px">
+                <div class="mb16">
                     <p>TOASTS! Try them out!</p>
                     <button id="test-button-1">toast1</button>
                     <button id="test-button-2">toast2</button>
@@ -32,7 +32,7 @@ export function launchWhatsNew() {
                     <button id="test-button-4">toast4</button>
                 </div>
 
-                <div style="margin-bottom: 16px">
+                <div class="mb16">
                     <p><i>Keyboard shortcuts</i>!</p>
                     <ul>
                         <li><b>Alt+Q</b> Close an active window</li>
@@ -51,7 +51,7 @@ export function launchWhatsNew() {
                     </ul>
                 </div>
 
-                <h1 style="margin-top: 16px">Fixed</h1>
+                <h1 class="mt16">Fixed</h1>
                 <p>Fixed a few bugs :)</p>
 
             </div>

@@ -20,11 +20,20 @@ export function shortcutHandler() {
     
         if (e.key == "w" && e.altKey) {
             if (window.activeWindow == null) {
-                createToast("No any active window!", 1000, "error");
+                createToast("No any active window!", 1000, "warn");
                 return;
             }
     
             createToast(stringify(window.activeWindow.getBoundingClientRect()), 3000);
+        }
+
+        if (e.key == "e" && e.altKey) {
+            if (window.activeWindow == null) {
+                createToast("No any active window!", 1000, "warn");
+                return;
+            }
+    
+            createToast(window.activeWindow.dataset.id, 3000);
         }
     });
 }
