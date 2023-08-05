@@ -1,4 +1,5 @@
-import { createWindow } from "../window/main";
+import { closeWindow, createWindow } from "../window/main";
+import twitchImage from "../../static/twitch.png";
 
 export function launchTwitch() {
     let windowDiv = createWindow({
@@ -14,12 +15,13 @@ export function launchTwitch() {
         `,
         flexCenter: true,
         center: true,
-        height: 150
+        height: 150,
+        icon: twitchImage
     });
 
     windowDiv.querySelector("#twitch-watch").onclick = () => {
         let channelName = windowDiv.querySelector("#twitch-channel").value;
-        windowDiv.remove();
+        closeWindow(windowDiv);
         
         createWindow({
             title: `https://twitch.tv/${channelName}`,
@@ -30,7 +32,8 @@ export function launchTwitch() {
             y: 39,
             width: 984,
             height: 569,
-            hideOverflow: true
+            hideOverflow: true,
+            icon: twitchImage
         });
     
         createWindow({
@@ -42,7 +45,8 @@ export function launchTwitch() {
             y: 38,
             width: 358,
             height: 806,
-            hideOverflow: true
+            hideOverflow: true,
+            icon: twitchImage
         });
     };
 

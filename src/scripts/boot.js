@@ -1,5 +1,6 @@
 import { launchCSS } from "./apps/css";
 import { loadApps } from "./desktop/loadApps";
+import { desktopUnfocusHandler } from "./desktop/main";
 import { shortcutHandler } from "./shortcuts";
 import { createToast } from "./toast/main";
 
@@ -12,6 +13,7 @@ window.activeWindow = null;
 window.activeApp = null;
 
 shortcutHandler();
+desktopUnfocusHandler();
 
 window.onerror = (_a, _b, _c, _d, err) => {
     createToast(`Uh oh! Seems like an error occured:<br>${err}<br>Check the console for more information...`, 5000, "error");

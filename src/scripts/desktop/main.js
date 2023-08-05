@@ -1,4 +1,5 @@
 import image from "../../static/nft.png";
+import { unfocus } from "../window/main";
 import { appMoveHandler } from "./move";
 
 export function createApp(text, launcher, x = 0, y = 0, icon = image) {
@@ -8,7 +9,7 @@ export function createApp(text, launcher, x = 0, y = 0, icon = image) {
     appDiv.ondblclick = launcher;
 
     appDiv.innerHTML = /*html*/`
-        <img src="${icon}" alt="icon" width="48" draggable="false">
+        <img src="${icon}" alt="icon" width="32" draggable="false">
         <span>${text}</span>
     `;
 
@@ -16,4 +17,10 @@ export function createApp(text, launcher, x = 0, y = 0, icon = image) {
     appDiv.style.top = `${y}px`;
 
     document.getElementById("desktop").append(appDiv);
+}
+
+export function desktopUnfocusHandler() {
+    document.getElementById("desktop").onclick = () => {
+        unfocus();
+    };
 }

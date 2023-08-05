@@ -1,6 +1,7 @@
 import _ from "underscore";
 import { windowMoveHandler } from "./move";
 import { windowResizeHandler } from "./resize";
+import { playAnimation } from "../util";
 
 const createWindowDefaultOptions = {
     title: "untitled window",
@@ -52,7 +53,7 @@ export function createWindow(options) {
         ` : ""}
     `;
 
-    windowDiv.onclick = (e) => {
+    windowDiv.onmousedown = (e) => {
         if (e.target.closest(".controls")) return;
         focusWindow(e.target.closest(".window"));
     };
@@ -66,7 +67,6 @@ export function createWindow(options) {
 
     document.getElementById("window-container").append(windowDiv);
 
-    windowDiv.style.zIndex = ++window.zIndex;
     windowDiv.style.left = `${options.x}px`;
     windowDiv.style.top = `${options.y}px`;
     windowDiv.style.width = `${options.width}px`;
@@ -81,18 +81,31 @@ export function createWindow(options) {
         windowDiv.style.top = `${~~(window.innerHeight / 2 - windowDiv.offsetHeight / 2)}px`;
     }
 
-    window.windows.push(id);
-    window.activeWindow = windowDiv;
+    focusWindow(windowDiv);
 
     return windowDiv;
 }
 
-function focusWindow(windowDiv) {
+export function focusWindow(windowDiv) {
+    document.querySelectorAll(".window.focused").forEach(e => {
+        e.classList.remove("focused");
+    });
     window.activeWindow = windowDiv;
+    window.activeWindow.classList.add("focused");
     window.activeWindow.style.zIndex = ++window.zIndex;
 }
 
-function closeWindow(windowDiv) {
-    windowDiv.remove();
+export function unfocus() {
+    document.querySelectorAll(".window.focused").forEach(e => {
+        e.classList.remove("focused");
+    });
     window.activeWindow = null;
+}
+
+export function closeWindow(windowDiv) {
+    playAnimation(windowDiv, "windowOpen ease reverse forwards", 100, () => {
+        console.log("closing window!");
+        windowDiv.remove();
+        window.activeWindow = null;
+    });
 }

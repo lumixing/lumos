@@ -1,8 +1,8 @@
-import { createWindow } from "../window/main";
+import { closeWindow, createWindow } from "../window/main";
 import image from "../../static/nft.png";
 
 export function launchAbout() {
-    createWindow({
+    let windowDiv = createWindow({
         title: "about lumOS",
         icon: image,
         center: true,
@@ -18,8 +18,12 @@ export function launchAbout() {
                     </div>
                 </div>
                 <p>really cool operating system</p>
-                <button class="align-self-center">ok</button>
+                <button id="about-ok" class="align-self-center">ok</button>
             </div>
         `
     });
+
+    windowDiv.querySelector("#about-ok").onclick = (e) => {
+        closeWindow(e.target.closest(".window"));  
+    };
 }

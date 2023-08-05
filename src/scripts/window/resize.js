@@ -21,7 +21,7 @@ function windowResizeMouseMoveHandler(e) {
     if (selectedWindowResize.classList.contains("top-resize") ||
         selectedWindowResize.classList.contains("top-left-resize") ||
         selectedWindowResize.classList.contains("top-right-resize")) {
-        window.activeWindow.style.height = `${window.activeWindow.offsetHeight - dy}px`;
+        window.activeWindow.style.height = `${window.activeWindow.offsetHeight - dy - 4}px`;
         if (window.activeWindow.offsetHeight - dy > 99) {
             window.activeWindow.style.top = `${window.activeWindow.offsetTop + dy}px`;
         }
@@ -29,17 +29,17 @@ function windowResizeMouseMoveHandler(e) {
     if (selectedWindowResize.classList.contains("right-resize") ||
         selectedWindowResize.classList.contains("top-right-resize") ||
         selectedWindowResize.classList.contains("bottom-right-resize")) {
-        window.activeWindow.style.width = `${window.activeWindow.offsetWidth + dx}px`;
+        window.activeWindow.style.width = `${window.activeWindow.offsetWidth + dx - 4}px`;
     }
     if (selectedWindowResize.classList.contains("bottom-resize") ||
         selectedWindowResize.classList.contains("bottom-left-resize") ||
         selectedWindowResize.classList.contains("bottom-right-resize")) {
-        window.activeWindow.style.height = `${window.activeWindow.offsetHeight + dy}px`;
+        window.activeWindow.style.height = `${window.activeWindow.offsetHeight + dy - 4}px`;
     }
     if (selectedWindowResize.classList.contains("left-resize") ||
         selectedWindowResize.classList.contains("top-left-resize") ||
         selectedWindowResize.classList.contains("bottom-left-resize")) {
-        window.activeWindow.style.width = `${window.activeWindow.offsetWidth - dx}px`;
+        window.activeWindow.style.width = `${window.activeWindow.offsetWidth - dx - 4}px`;
         if (window.activeWindow.offsetWidth - dx > 99) {
             window.activeWindow.style.left = `${window.activeWindow.offsetLeft + dx}px`;
         }
