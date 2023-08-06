@@ -1,4 +1,4 @@
-import { launchCSS } from "./apps/css";
+import { applySettings, launchSettings } from "./apps/settings";
 import { loadApps } from "./desktop/loadApps";
 import { desktopUnfocusHandler } from "./desktop/main";
 import { shortcutHandler } from "./shortcuts";
@@ -24,5 +24,7 @@ if (loadedCSS) {
     document.getElementById("custom-css-style").innerHTML = loadedCSS;
 }
 
+applySettings();
+
 loadApps();
-launchCSS();
+launchSettings();
