@@ -1,4 +1,4 @@
-import { closeWindow } from "../window/main";
+import { closeWindow, createWindow } from "../window/main";
 
 export function shortcutHandler() {
     document.addEventListener("keydown", (e) => {
@@ -7,6 +7,13 @@ export function shortcutHandler() {
         if (e.key == "Q" && e.altKey) {
             if (!window.activeWindow) return;
             closeWindow(window.activeWindow);
+        }
+
+        if (e.key == "a" && e.altKey) {
+            createWindow({
+                title: Math.random(),
+                position: "random"
+            });
         }
     });
 }

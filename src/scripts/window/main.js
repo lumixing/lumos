@@ -1,6 +1,9 @@
 import _ from "underscore";
 import { windowMoveMouseDown } from "./move";
 import { windowResizeMouseDown } from "./resize";
+import { addTaskbarApp, focusTaskbarApp, removeTaskbarApp, unfocusAllTaskbarApps } from "../taskbar/main";
+
+let windowContainer = document.getElementById("window-container");
 
 const defaultOptions = {
     title: "untitled window",
@@ -16,9 +19,11 @@ const defaultOptions = {
 export function createWindow(options) {
     options = _.defaults({}, _.clone(options), defaultOptions);
 
+    let id = Math.random();
     let windowDiv = document.createElement("div");
 
     windowDiv.classList.add("window");
+    windowDiv.dataset.id = id;
     windowDiv.innerHTML = /*html*/`
         <div class="head${!options.movable ? " no-move" : ""}">
             <div class="left">
@@ -44,8 +49,9 @@ export function createWindow(options) {
         ` : ""}
     `;
     
-    document.getElementById("window-container").append(windowDiv);
+    windowContainer.append(windowDiv);
 
+    addTaskbarApp(options.title, id);
     focusWindow(windowDiv);
     let windowHead = windowDiv.querySelector(".head");
 
@@ -89,15 +95,34 @@ export function createWindow(options) {
         });
     }
 
+    if (options.minimizable) {
+        windowDiv.querySelector(".minimize").addEventListener("click", () => {
+            minimizeWindow(windowDiv);
+        });
+    }
+
     return windowDiv;
 }
 
-function focusWindow(windowDiv) {
+export function getWindowDiv(id) {
+    return windowContainer.querySelector(`.window[data-id="${id}"]`);
+}
+
+export function focusWindow(windowDiv) {
     window.activeWindow = windowDiv;
+    windowDiv.style.display = "flex";
     windowDiv.style.zIndex = ++window.zIndex;
+    focusTaskbarApp(windowDiv.dataset.id);
 }
 
 export function closeWindow(windowDiv) {
     window.activeWindow = null;
+    removeTaskbarApp(windowDiv.dataset.id);
     windowDiv.remove();
+}
+
+export function minimizeWindow(windowDiv) {
+    window.activeWindow = null;
+    windowDiv.style.display = "none";
+    unfocusAllTaskbarApps();
 }
