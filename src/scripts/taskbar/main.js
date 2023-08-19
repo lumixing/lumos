@@ -1,4 +1,5 @@
 import { closeWindow, focusWindow, getWindowDiv, minimizeWindow } from "../window/main";
+import { updateClock } from "./clock";
 
 let taskbarAppContainer = document.getElementById("taskbar-app-container")
 
@@ -42,4 +43,8 @@ export function unfocusAllTaskbarApps() {
     taskbarAppContainer.querySelectorAll(".taskbar-app").forEach(e => {
         e.classList.remove("focused");
     });
+}
+
+export function updateTray() {
+    updateClock();
 }

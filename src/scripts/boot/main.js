@@ -1,3 +1,4 @@
+import { updateTray } from "../taskbar/main";
 import { createWindow } from "../window/main";
 import { shortcutHandler } from "./shortcuts";
 
@@ -10,3 +11,7 @@ createWindow({
 });
 
 shortcutHandler();
+
+setInterval(() => {
+    updateTray();
+}, 100);

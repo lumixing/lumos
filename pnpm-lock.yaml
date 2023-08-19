@@ -14,6 +14,9 @@ dependencies:
   parcel:
     specifier: ^2.9.3
     version: 2.9.3
+  pnpm:
+    specifier: ^8.6.12
+    version: 8.6.12
   sass:
     specifier: ^1.64.1
     version: 1.64.1
@@ -1962,6 +1965,7 @@ packages:
   /node-gyp-build-optional-packages@5.0.7:
     resolution: {integrity: sha512-YlCCc6Wffkx0kHkmam79GKvDQ6x+QZkMjFGrIMxgFNILFvGSbCp2fCBC55pGTT9gVaz8Na5CLmxt/urtzRv36w==}
     hasBin: true
+    requiresBuild: true
     optional: true
 
   /node-releases@2.0.13:
@@ -2107,6 +2111,12 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       find-up: 4.1.0
+    dev: false
+
+  /pnpm@8.6.12:
+    resolution: {integrity: sha512-Eza4C5SO/Xl5IYozupbZ5NOA5leBRPYxmXmXfe7G4/4uCkRLhks84rB33aitxNZU/uMrnDGGjwrLktoKvPjqHA==}
+    engines: {node: '>=16.14'}
+    hasBin: true
     dev: false
 
   /postcss-value-parser@4.2.0:
