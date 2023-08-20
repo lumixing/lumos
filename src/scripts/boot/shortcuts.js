@@ -15,5 +15,10 @@ export function shortcutHandler() {
                 position: "random"
             });
         }
+
+        if (e.key == "e") {
+            if (!window.activeWindow) return;
+            console.log(window.activeWindow.getBoundingClientRect());
+        }
     });
 }

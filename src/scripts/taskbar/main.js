@@ -3,12 +3,15 @@ import { updateClock } from "./clock";
 
 let taskbarAppContainer = document.getElementById("taskbar-app-container")
 
-export function addTaskbarApp(name, id, focus = true) {
+export function addTaskbarApp(name, id, icon = null, focus = true) {
     let appDiv = document.createElement("button");
     
     appDiv.classList.add("taskbar-app");
     appDiv.dataset.id = id;
-    appDiv.innerHTML = name;
+    appDiv.innerHTML = /*html*/`
+        ${icon ? `<img src=${icon} alt="icon" draggable="false">` : ""}
+        <span>${name}</span>  
+    `;
 
     taskbarAppContainer.append(appDiv);
 

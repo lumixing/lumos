@@ -66,9 +66,18 @@ button {
         }
 
         >.left {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+
+            img {
+                width: 16px;
+                height: 16px;
+            }
 
             .title {
                 text-shadow: 1px 1px white;
@@ -209,12 +218,18 @@ button {
     margin-bottom: 1px;
 
     .taskbar-app {
-        display: block;
-        text-align: left;
+        display: flex;
+        justify-content: start;
+        gap: 4px;
         width: 200px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+
+        img {
+            width: 16px;
+            height: 16px;
+        }
 
         &.focused {
             background-color: #ccc;

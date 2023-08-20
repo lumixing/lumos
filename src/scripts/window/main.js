@@ -2,18 +2,21 @@ import _ from "underscore";
 import { windowMoveMouseDown } from "./move";
 import { windowResizeMouseDown } from "./resize";
 import { addTaskbarApp, focusTaskbarApp, removeTaskbarApp, unfocusAllTaskbarApps } from "../taskbar/main";
+// import image from "../../static/lumos.png";
 
 let windowContainer = document.getElementById("window-container");
 
 const defaultOptions = {
     title: "untitled window",
     body: "<p>unbodied window</p>",
+    icon: null,
     movable: true,
     resizable: true,
     position: [100, 100],
     size: [600, 400],
     closable: true,
-    minimizable: true
+    minimizable: true,
+    centerBody: false
 };
 
 export function createWindow(options) {
@@ -23,10 +26,12 @@ export function createWindow(options) {
     let windowDiv = document.createElement("div");
 
     windowDiv.classList.add("window");
+
     windowDiv.dataset.id = id;
     windowDiv.innerHTML = /*html*/`
         <div class="head${!options.movable ? " no-move" : ""}">
             <div class="left">
+                ${options.icon ? `<img src="${options.icon}" alt="icon">` : ""}
                 <span class="title">${options.title}</span>
             </div>
             <div class="right">
@@ -51,9 +56,10 @@ export function createWindow(options) {
     
     windowContainer.append(windowDiv);
 
-    addTaskbarApp(options.title, id);
+    addTaskbarApp(options.title, id, options.icon);
     focusWindow(windowDiv);
     let windowHead = windowDiv.querySelector(".head");
+    let windowBody = windowDiv.querySelector(".body");
 
     // window size
     windowDiv.style.width = `${options.size[0]}px`;
@@ -99,6 +105,10 @@ export function createWindow(options) {
         windowDiv.querySelector(".minimize").addEventListener("click", () => {
             minimizeWindow(windowDiv);
         });
+    }
+
+    if (options.centerBody) {
+        windowBody.classList.add("flex", "flex-center");
     }
 
     return windowDiv;
